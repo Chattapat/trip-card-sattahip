@@ -2,7 +2,13 @@
 <html class="staticrypt-html">
     <head>
         <meta charset="utf-8" />
-        <title>Protected Page</title>
+        <title>Trip Card · Locked</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap"
+          rel="stylesheet"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <!-- do not cache this page -->
@@ -13,124 +19,288 @@
         <meta http-equiv="pragma" content="no-cache" />
 
         <style>
-            .staticrypt-hr {
-                margin-top: 20px;
-                margin-bottom: 20px;
-                border: 0;
-                border-top: 1px solid #eee;
+            /* ----- Coral Reef Password Gate · matches Trip Card palette ----- */
+            :root {
+                --bg: #fdfaf5;
+                --surface: #ffffff;
+                --surface-2: #f4ecdb;
+                --hairline: #e5d9bf;
+                --hairline-strong: #d4c4a3;
+                --ink: #1a2832;
+                --ink-2: #3a4a56;
+                --ink-3: #6d7c87;
+                --ink-4: #9aa7af;
+                --tide: #0891a3;
+                --tide-2: #055e6c;
+                --tide-soft: #d7f1f5;
+                --ember: #ff6b6b;
+                --ember-soft: #ffe5e5;
+                color-scheme: light;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg: #0f1a1f;
+                    --surface: #162026;
+                    --surface-2: #1f2b32;
+                    --hairline: #2a363d;
+                    --hairline-strong: #3a4651;
+                    --ink: #f5f0e8;
+                    --ink-2: #dcd2bf;
+                    --ink-3: #9aa7af;
+                    --ink-4: #6d7c87;
+                    --tide: #7dd3e8;
+                    --tide-2: #5ab8cf;
+                    --tide-soft: #0d2e36;
+                    --ember: #ff8a8a;
+                    --ember-soft: #3d1f1f;
+                    color-scheme: dark;
+                }
+            }
+
+            * { box-sizing: border-box; }
+
+            .staticrypt-html {
+                height: 100%;
+            }
+            .staticrypt-body {
+                height: 100%;
+                margin: 0;
+                font-family: 'Inter', 'IBM Plex Sans Thai', system-ui, -apple-system, sans-serif;
+                background: var(--bg);
+                color: var(--ink);
+                -webkit-font-smoothing: antialiased;
+                font-feature-settings: 'ss01', 'cv11';
+            }
+
+            .staticrypt-content {
+                height: 100%;
+                background: var(--bg);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Floating decorative bubbles · Coral Reef accent */
+            .staticrypt-content::before,
+            .staticrypt-content::after {
+                content: '';
+                position: absolute;
+                border-radius: 50%;
+                pointer-events: none;
+                background: radial-gradient(circle at 28% 28%,
+                    rgba(255,255,255,0.95) 0%,
+                    rgba(255,255,255,0.35) 18%,
+                    color-mix(in srgb, var(--tide) 30%, transparent) 50%,
+                    color-mix(in srgb, var(--tide) 10%, transparent) 90%);
+                border: 1px solid color-mix(in srgb, var(--tide) 40%, transparent);
+                box-shadow:
+                    inset 1px 1px 3px rgba(255,255,255,0.7),
+                    0 0 14px color-mix(in srgb, var(--tide) 35%, transparent);
+                animation: gate-float 9s ease-in-out infinite;
+            }
+            .staticrypt-content::before {
+                width: 96px;
+                height: 96px;
+                top: 12%;
+                left: 8%;
+                animation-delay: 0s;
+            }
+            .staticrypt-content::after {
+                width: 64px;
+                height: 64px;
+                bottom: 14%;
+                right: 10%;
+                animation-delay: 3.5s;
+                background: radial-gradient(circle at 28% 28%,
+                    rgba(255,255,255,0.95) 0%,
+                    color-mix(in srgb, var(--ember) 30%, transparent) 50%,
+                    transparent 90%);
+                border-color: color-mix(in srgb, var(--ember) 40%, transparent);
+                box-shadow:
+                    inset 1px 1px 3px rgba(255,255,255,0.7),
+                    0 0 14px color-mix(in srgb, var(--ember) 35%, transparent);
+            }
+            @keyframes gate-float {
+                0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.85; }
+                50%       { transform: translate(8px, -22px) scale(1.05); opacity: 1; }
             }
 
             .staticrypt-page {
-                width: 360px;
-                padding: 8% 0 0;
-                margin: auto;
+                width: 100%;
+                max-width: 440px;
+                margin: 0 auto;
+                padding: clamp(2.5rem, 8vh, 6rem) 1.5rem 2rem;
                 box-sizing: border-box;
+                position: relative;
+                z-index: 1;
             }
 
             .staticrypt-form {
-                position: relative;
-                z-index: 1;
-                background: #ffffff;
-                max-width: 360px;
-                margin: 0 auto 100px;
-                padding: 45px;
-                text-align: center;
-                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+                background: var(--surface);
+                border: 1px solid var(--hairline);
+                border-radius: 4px;
+                padding: 2.75rem 2.25rem 2rem;
+                box-shadow: 0 4px 24px -8px color-mix(in srgb, var(--ink) 12%, transparent);
             }
 
-            .staticrypt-form input[type="password"],
-            input[type="text"] {
-                background: inherit;
+            .staticrypt-instructions {
+                margin-bottom: 1.5rem;
+            }
+
+            .staticrypt-instructions::before {
+                content: 'Weekend Trip #1 · Locked';
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                color: var(--ink-3);
+                margin-bottom: 1rem;
+            }
+
+            .staticrypt-title {
+                font-family: 'Fraunces', 'IBM Plex Sans Thai', serif;
+                font-optical-sizing: auto;
+                font-variation-settings: 'opsz' 96, 'SOFT' 100;
+                font-size: clamp(2rem, 6vw, 2.75rem);
+                font-weight: 500;
+                line-height: 0.95;
+                letter-spacing: -0.045em;
+                color: var(--ink);
+                margin: 0;
+                padding: 0;
+            }
+            /* Replace "Protected Page" text via CSS — see HTML edit */
+            .staticrypt-title-accent {
+                font-style: italic;
+                font-weight: 400;
+                color: var(--tide);
+            }
+
+            .staticrypt-instructions p:not(.staticrypt-title) {
+                margin-top: 0.75rem;
+                font-size: 0.875rem;
+                color: var(--ink-2);
+                line-height: 1.6;
+            }
+
+            .staticrypt-hr {
+                margin: 1.5rem 0;
                 border: 0;
-                box-sizing: border-box; /* This ensures padding is included in the total width */
-                font-size: 14px;
-                outline: 0;
-                padding: 15px 30px 15px 15px; /* Adjust the padding to ensure there is space for the icon */
-                width: 100%;
+                border-top: 1px solid var(--hairline);
             }
 
             .staticrypt-password-container {
                 position: relative;
-                outline: 0;
-                background: #f2f2f2;
-                width: 100%;
+                background: var(--surface-2);
+                border: 1px solid var(--hairline);
+                border-radius: 2px;
+                margin: 0 0 1rem;
+                transition: border-color 200ms ease;
+            }
+            .staticrypt-password-container:focus-within {
+                border-color: var(--tide);
+            }
+
+            .staticrypt-form input[type="password"],
+            .staticrypt-form input[type="text"] {
+                background: transparent;
                 border: 0;
-                margin: 0 0 15px;
-                box-sizing: border-box;
+                font-family: 'JetBrains Mono', ui-monospace, monospace;
+                font-size: 14px;
+                outline: 0;
+                padding: 14px 44px 14px 14px;
+                width: 100%;
+                color: var(--ink);
+            }
+            .staticrypt-form input::placeholder {
+                color: var(--ink-4);
+                font-family: 'Inter', sans-serif;
             }
 
             .staticrypt-toggle-password-visibility {
                 cursor: pointer;
-                height: 20px;
-                opacity: 60%;
+                height: 18px;
+                width: 18px;
+                opacity: 0.55;
                 padding: 13px;
                 position: absolute;
                 right: 0;
                 top: 50%;
                 transform: translateY(-50%);
-                width: 20px;
+                transition: opacity 160ms ease;
+                filter: invert(50%);
             }
-
-            .staticrypt-form .staticrypt-decrypt-button {
-                text-transform: uppercase;
-                outline: 0;
-                background: #4CAF50;
-                width: 100%;
-                border: 0;
-                padding: 15px;
-                color: #ffffff;
-                font-size: 14px;
-                cursor: pointer;
+            .staticrypt-toggle-password-visibility:hover {
+                opacity: 0.9;
             }
-
-            .staticrypt-form .staticrypt-decrypt-button:hover,
-            .staticrypt-form .staticrypt-decrypt-button:active,
-            .staticrypt-form .staticrypt-decrypt-button:focus {
-                background: #4CAF50;
-                filter: brightness(92%);
-            }
-
-            .staticrypt-html {
-                height: 100%;
-            }
-
-            .staticrypt-body {
-                height: 100%;
-                margin: 0;
-            }
-
-            .staticrypt-content {
-                height: 100%;
-                margin-bottom: 1em;
-                background: #76B852;
-                font-family: "Arial", sans-serif;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-            }
-
-            .staticrypt-instructions {
-                margin-top: -1em;
-                margin-bottom: 1em;
-            }
-
-            .staticrypt-title {
-                font-size: 1.5em;
+            @media (prefers-color-scheme: dark) {
+                .staticrypt-toggle-password-visibility {
+                    filter: invert(80%);
+                }
             }
 
             label.staticrypt-remember {
                 display: flex;
                 align-items: center;
-                margin-bottom: 1em;
+                margin-bottom: 1.25rem;
+                font-size: 13px;
+                color: var(--ink-3);
+                cursor: pointer;
             }
-
             .staticrypt-remember input[type="checkbox"] {
-                transform: scale(1.5);
-                margin-right: 1em;
+                transform: scale(1.1);
+                margin-right: 0.75rem;
+                accent-color: var(--tide);
+                cursor: pointer;
             }
 
-            .hidden {
-                display: none !important;
+            .staticrypt-form .staticrypt-decrypt-button {
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                outline: 0;
+                background: var(--ink);
+                width: 100%;
+                border: 0;
+                padding: 14px;
+                color: var(--bg);
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                font-weight: 500;
+                cursor: pointer;
+                border-radius: 2px;
+                transition: background 200ms ease, transform 120ms ease;
             }
+            .staticrypt-form .staticrypt-decrypt-button:hover,
+            .staticrypt-form .staticrypt-decrypt-button:focus {
+                background: var(--tide-2);
+            }
+            @media (prefers-color-scheme: dark) {
+                .staticrypt-form .staticrypt-decrypt-button:hover,
+                .staticrypt-form .staticrypt-decrypt-button:focus {
+                    background: var(--tide);
+                    color: var(--ink);
+                }
+            }
+            .staticrypt-form .staticrypt-decrypt-button:active {
+                transform: scale(0.98);
+            }
+
+            /* Footer */
+            .staticrypt-form::after {
+                content: '14 May 2026 · password-protected';
+                display: block;
+                margin-top: 1.5rem;
+                padding-top: 1.25rem;
+                border-top: 1px solid var(--hairline);
+                font-size: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                color: var(--ink-4);
+                text-align: center;
+            }
+
+            .hidden { display: none !important; }
 
             .staticrypt-spinner-container {
                 height: 100%;
@@ -138,36 +308,22 @@
                 align-items: center;
                 justify-content: center;
             }
-
             .staticrypt-spinner {
                 display: inline-block;
                 width: 2rem;
                 height: 2rem;
-                vertical-align: text-bottom;
-                border: 0.25em solid gray;
-                border-right-color: transparent;
+                border: 2px solid var(--hairline);
+                border-right-color: var(--tide);
                 border-radius: 50%;
-                -webkit-animation: spinner-border 0.75s linear infinite;
                 animation: spinner-border 0.75s linear infinite;
-                animation-duration: 0.75s;
-                animation-timing-function: linear;
-                animation-delay: 0s;
-                animation-iteration-count: infinite;
-                animation-direction: normal;
-                animation-fill-mode: none;
-                animation-play-state: running;
-                animation-name: spinner-border;
             }
-
             @keyframes spinner-border {
-                100% {
-                    transform: rotate(360deg);
-                }
+                100% { transform: rotate(360deg); }
             }
 
             @media screen and (-webkit-min-device-pixel-ratio: 0) {
                 .staticrypt-form input[type="password"],
-                input[type="text"] {
+                .staticrypt-form input[type="text"] {
                     font-size: 16px;
                 }
             }
@@ -183,8 +339,8 @@
             <div class="staticrypt-page">
                 <div class="staticrypt-form">
                     <div class="staticrypt-instructions">
-                        <p class="staticrypt-title">Protected Page</p>
-                        <p></p>
+                        <p class="staticrypt-title">Khon Kaen<br/><span class="staticrypt-title-accent">to</span> Sattahip</p>
+                        <p>Trip card is password-protected. Enter the access password to view the full itinerary, contacts, and frames.</p>
                     </div>
 
                     <hr class="staticrypt-hr" />
